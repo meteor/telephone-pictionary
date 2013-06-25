@@ -3,14 +3,145 @@
 </head>
 
 <body>
-  {{> draw}}
+  {{loginButtons}}
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span8 offset1">
+        {{> main}}
+      </div>
+      <div class="span2">
+        {{> sidebar}}
+      </div>
+  </div>
 </body>
 
+<template name="main">
+  {{#if loggedIn}}
+  {{#with assignment}}
+    {{#if start}}
+      {{> start}}
+    {{/if}}
+    {{#if describe}}
+      {{> describe}}
+    {{/if}}
+    {{#if draw}}
+      {{> draw}}
+    {{/if}}
+  {{/with}}
+  {{#with game}}
+    {{> show}}
+  {{/with}}
+  {{else}}
+  <h1>Log in to play</h1>
+  {{/if}}
+</template>
+
+<template name="sidebar">
+  {{#if loggedIn}}
+  <ul class="nav nav-pills nav-stacked">
+    <li class="{{playActive}}"><a class="playGame">Play</a></li>
+    <li class="nav-header">Your recent games:</li>
+    {{#each recentGames}}
+    <li class="{{gameActive}}"><a class="selectGame" id="{{_id}}">{{firstPhrase}}</a></li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</template>
+
+<template name="show">
+  <div class="show container-fluid">
+    {{#each moves}}
+      {{#with move}}
+        {{> showMove}}
+      {{/with}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="showMove">
+  <div class="row-fluid">
+    {{#if picture}}
+      {{#constant}}
+        <div class="canvas">
+          <canvas id="{{_id}}"></canvas>
+        </div>
+      {{/constant}}
+    {{else}}
+    <h3>{{answer}}</h3>
+    {{/if}}
+  </div>
+</template>
+
+<template name="timer">
+  <h1 class="text-warning">{{timeLeft}}</h1>
+</template>
+
+<template name="start">
+  <div class="start container-fluid">
+    <div class="row-fluid">
+      <div class="span6">
+        <h1>Start!</h1>
+      </div>
+      <div class="span6">
+        {{> timer}}
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <h2 class="muted">Write a phrase someone could draw:</h2>
+        <div class="input-append">
+          <form>
+            <input id="phrase" class="input-xxlarge" type="text"></input>
+            <a class="btn" id="done">Done!</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="describe">
+  <div class="describe container-fluid">
+    <div class="row-fluid">
+      <div class="span6">
+        <h1>Describe!</h1>
+      </div>
+      <div class="span6">
+        {{> timer}}
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="input-append">
+          <form>
+            <input id="phrase" class="input-xxlarge" type="text"></input>
+            <a class="btn" id="done">Done!</a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      {{#constant}}
+      <div class="canvas">
+        <canvas id="pictionary"></canvas>
+      </div>
+      {{/constant}}
+    </div>
+  </div>
+</template>
 
 <template name="draw">
   <div class="draw container-fluid">
     <div class="row-fluid">
-      <h1>Draw!</h1>
+      <div class="span6">
+        <h1>Draw!</h1>
+      </div>
+      <div class="span6">
+        {{> timer}}
+      </div>
+    </div>
+    <div class="row-fluid">
+      <h3>{{description}}</h3>
     </div>
     <div class="row-fluid">
       <div class="btn-toolbar">
@@ -37,6 +168,9 @@
         <canvas id="pictionary"></canvas>
       </div>
       {{/constant}}
+    </div>
+    <div class="row-fluid">
+      <a class="btn btn-large" id="done">Done!</a>
     </div>
   </div>
 </template>

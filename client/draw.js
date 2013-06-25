@@ -1,8 +1,4 @@
 
-var activeIfTrue = function (b) {
-  return b ? "active" : "";
-};
-
 Session.setDefault('pencilSize', "small");
 Session.setDefault('pencilColor', "black");
 
@@ -82,5 +78,13 @@ Template.colorButton.active = function () {
 Template.colorButton.events({
   'click' : function () {
     Session.set('pencilColor', this.toString());
+  }
+});
+
+Template.draw.events({
+  'submit, click #done': function (evt, templ) {
+    if (templ.canvas) {
+      submitAnswer(templ.canvas.toObject());
+    }
   }
 });
