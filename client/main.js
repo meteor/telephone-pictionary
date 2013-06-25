@@ -34,7 +34,6 @@ Meteor.autorun(function () {
   }
 });
 
-
 submitAnswer = function (answer) {
   var assignment = Session.get('assignment');
   if (assignment) {

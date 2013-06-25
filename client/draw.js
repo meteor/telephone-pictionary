@@ -1,5 +1,5 @@
-
-Session.setDefault('pencilSize', "small");
+Session.setDefault('pencilActive', true);
+Session.setDefault('pencilSize', "medium");
 Session.setDefault('pencilColor', "black");
 
 Template.draw.rendered = (function () {
@@ -30,7 +30,6 @@ Template.draw.destroyed = function () {
 };
 
 Template.draw.colors = [ "black", "red", "orange", "yellow", "green", "blue", "indigo", "violet", "white"];
-
 
 Template.draw.pencilActive = function () {
   return activeIfTrue(Session.get('pencilActive'));
