@@ -1,42 +1,47 @@
-GAME_LENGTH = 4;
+GAME_LENGTH = 7;
 
 Meteor.methods({
   getAssignment: function () {
     if (!Meteor.userId()) {
       throw new Error("Must be logged in to play");
     }
-    var game = Games.findOne({
-      done: false,
-      activeMove: null,
-      participants: {
-        $ne: Meteor.userId()
-      }
-    });
-    var move = {
+    var move = Moves.findOne({
       assignee: Meteor.userId(),
-      expires: new Date(new Date().valueOf() + 100*1000),
       answer: null
-    };
-    var previous = null;
-    if (game) {
-      previous = game.moves[game.moves.length-1];
-      move.previous = previous;
-      move.game = game._id;
-    } else {
-      var gameId = Games.insert({
+    });
+    if (!move) {
+      move = {
+        assignee: Meteor.userId(),
+        expires: new Date(new Date().valueOf() + 100*1000),
+        answer: null,
+        _id: Random.id()
+      };
+      var game = Games.findOne({
         done: false,
         activeMove: null,
-        participants: [],
-        moves: []
+        participants: {
+          $ne: Meteor.userId()
+        }
       });
-      move.game = gameId;
+      if (game) {
+        move.previous = game.moves[game.moves.length-1];
+        move.game = game._id;
+      } else {
+        var gameId = Games.insert({
+          done: false,
+          activeMove: null,
+          participants: [],
+          moves: []
+        });
+        move.game = gameId;
+      }
+      Moves.insert(move);
+      Games.update(move.game, {$set: {activeMove: move._id}});
     }
-    var moveId = Moves.insert(move);
-    Games.update(move.game, {$set: {activeMove: moveId}});
-    if (previous) {
-      var prevMove = Moves.findOne(previous);
+    if (move.previous) {
+      var prevMove = Moves.findOne(move.previous);
       if (!prevMove)
-        console.log("no prev move for", previous);
+        throw new Error("missing the previous move");
       if (typeof prevMove.answer === "string") {
         move.draw = true;
         move.description = prevMove.answer;
@@ -47,7 +52,6 @@ Meteor.methods({
     } else {
       move.start = true;
     }
-    move._id = moveId;
     return move;
   },
   submitAnswer: function (assignmentId, answer) {

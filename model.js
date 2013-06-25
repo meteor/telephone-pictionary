@@ -15,3 +15,23 @@ Moves = new Meteor.Collection("moves");
  * A boolean for its finished state.
  */
 Games = new Meteor.Collection("games");
+
+
+if (Meteor.isServer) {
+  Meteor.publish('gamesForUser', function () {
+    return  Games.find({
+      done: true,
+      participants: this.userId
+    });
+  });
+
+  Meteor.publish('movesForGame', function (gameId) {
+    var game = Games.find({_id: gameId, participants: this.userId});
+    if (game) {
+      return Moves.find({
+        game: gameId
+      });
+    }
+    return null;
+  });
+}

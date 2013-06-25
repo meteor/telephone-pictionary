@@ -1,3 +1,13 @@
+Meteor.autorun(function () {
+  Meteor.subscribe('gamesForUser');
+});
+
+Meteor.autorun(function () {
+  Games.find().forEach(function (game) {
+    Meteor.subscribe('movesForGame', game._id);
+  });
+});
+
 Template.main.loggedIn = Template.sidebar.loggedIn = function () {
   return Meteor.userId();
 };
@@ -43,7 +53,8 @@ Template.sidebar.recentGames = function () {
 
 
 Template.sidebar.firstPhrase = function () {
-  return Moves.findOne(this.moves[0]).answer;
+  var move = Moves.findOne(this.moves[0]);
+  return move && move.answer;
 };
 
 Template.sidebar.events({
@@ -61,28 +72,4 @@ Template.sidebar.gameActive = function () {
 
 Template.sidebar.playActive = function () {
   return activeIfTrue(!Session.get("viewingGame"));
-};
-
-
-Template.show.move = function () {
-  return Moves.findOne(this.toString());
-};
-
-Template.show.moves = function () {
-  return this.moves;
-};
-
-Template.showMove.picture = function () {
-  return typeof this.answer === "object";
-};
-
-Template.showMove.rendered = function () {
-  var self = this;
-  if (typeof self.data.answer === "object" && !self.canvas) {
-    self.canvas = new fabric.StaticCanvas(self.data._id);
-    self.canvas.setWidth(640);
-    self.canvas.setHeight(480);
-    self.canvas.loadFromJSON(self.data.answer);
-    self.canvas.renderAll();
-  }
 };
