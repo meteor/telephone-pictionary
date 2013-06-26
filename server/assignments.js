@@ -89,18 +89,23 @@ Meteor.methods({
       check(answer, Object);
     else
       check(answer, String);
-
-    // PHASE 5
-
-    // Set the answer field on the move in the Moves table
-
-    // Find the relevant game, and
-    // * Set its activeMove back to null
-    // * Mark it done if it is done
-    // * Add the current userId to the list of participants
-    // * Add the current move to the list of moves.
-
-    // For the last two, the mongo updaters $addToSet or $push may be useful.
+    Moves.update(assignmentId, {$set: {answer: answer}});
+    // Find the relevant game
+    var game = Games.findOne(assignment.game);
+    // Set the game to have no activeMove, and to be done if it has enough moves.
+    var gameSetter = {activeMove: null};
+    if (game.moves.length >= GAME_LENGTH - 1)
+      gameSetter.done = true;
+    // Also add this user to the participants, and this move to the list of moves.
+    Games.update(game._id, {
+      $set: gameSetter,
+      $addToSet: {
+        participants: Meteor.userId()
+      },
+      $push: {
+        moves: assignmentId
+      }
+    });
   }
 });
 
