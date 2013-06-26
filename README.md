@@ -17,7 +17,7 @@ example, to find spots in the code relevant to phase 1, type `git grep PHASE 1`.
 To start playing:
 
 * Install Meteor.  At your terminal, type:
-        $ curl https://install.meteor.com | /bin/sh
+         $ curl https://install.meteor.com | /bin/sh
 * Check out this git repository
 * Navigate to your checkout, and type `meteor` at your terminal.
 
