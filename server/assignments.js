@@ -7,45 +7,71 @@ Meteor.methods({
     if (!Meteor.userId())
       throw new Meteor.Error(403, "Must be logged in to play");
 
-    // PHASE 3
+    // Use mongo to try and find a move we're already assigned.
 
-    // This is the most involved, coding-wise, of the exercises in this
-    // project.  It's mostly mongodb manipulations.  Before you continue here,
-    // take a look at model.js for what fields will be in your db.
-
-    // Use mongo to try and find a move we're already assigned (PHASE 6 -- and
-    // that hasn't expired).
-
+    // PHASE 6
+    // Modify this to require that the move hasn't expired.
+    var move = Moves.findOne({
+      assignee: Meteor.userId(),
+      answer: null
+    });
     // If there's no such move, create one
     // * Assigned to us
     // * Expiring in 100 seconds
     // * With an answer of null so far
     // * Create an _id for it explicitly (why?)
+    if (!move) {
+      move = {
+        assignee: Meteor.userId(),
+        expires: new Date(new Date().valueOf() + 100*1000),
+        answer: null,
+        _id: Random.id()
+      };
+      // PHASE 3
 
-    // Find a game to put the move in
-    // * That isn't done
-    // * With no activeMove
-    // * Where we're not already a participant (you can leave this one out for a while)
-    //   (Hint: {$ne: foo}, when matched against a list, means "no member of the list is foo)
+      // Use Mongo to find a game to tack this move on to.  The criteria are:
+      // * The game is not done
+      // * The game has no active move.
+      // * We have not yet participated in this game (you can leave this
+      //   one out for a while while you test).
 
-    // If we found the a game, set up the `previous` field on the move with the
-    // previous move in that game.
+      // If we found the a game, set up the `previous` field on the move with the
+      // previous move in that game.
 
-    // If we haven't found a game, set one up. (hint: It's not done, has no
-    // participants yet, and no moves yet)
+      // If we haven't found a game, set one up and insert it into the Games
+      // collection. (hint: It's not done, its `activeMove` is null, has no
+      // participants yet, and no moves yet)
 
-    // Insert into the Moves table the new move
-    // Update the Games table with the new active move for that game
+      // Either way, set the `game` field on the move to be the _id of the game
+      // it belongs to.
 
-    // You're going to return the move, but augment it first, depending on the
-    // previous move.
-    // * If there was no previous move, set the `start` field to true.
-    // * If the previous move was a picture (the `answer` field on the previous
-    //   move will be an object), set the `picture` field to the previous
-    //   answer.
-    // * If the previous move was a description (the `answer` field on the
-    //   previous move will be a string), set the `description` field to the
-    //   previous answer.
+
+      // Now we insert the move to the moves table.
+      Moves.insert(move);
+
+      // PHASE 3
+
+      // Okay, now let's set the `activeMove` of our game to our new move, using
+      // the update() method on the Games collection.
+    }
+
+    // Here, we do some work to make it easier for the client to make decisions
+    // based on their assigned move -- we augment the move object with the
+    // answer from the previous move.  Note that this doesn't affect what's in
+    // the database.
+    if (move.previous) {
+      var prevMove = Moves.findOne(move.previous);
+      if (!prevMove)
+        throw new Error("missing the previous move");
+      if (typeof prevMove.answer === "string") {
+        move.description = prevMove.answer;
+      } else {
+        move.picture = prevMove.answer;
+      }
+    } else {
+      move.start = true;
+    }
+    return move;
   },
   // Answer a particular assigned move with the given answer
   submitAnswer: function (assignmentId, answer) {
