@@ -28,7 +28,7 @@ Template.describe.events({
     evt.stopPropagation();
     evt.preventDefault();
     // PHASE 5
-    // use the template to find the '#phrase' input
+    // use the template to find the '#phrase' input element
     // if it has a value, submit that.
 
     // note: check the submitAnswer helper function in main.js

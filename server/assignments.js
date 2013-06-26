@@ -6,6 +6,7 @@ Meteor.methods({
   getAssignment: function () {
     if (!Meteor.userId())
       throw new Meteor.Error(403, "Must be logged in to play");
+
     // PHASE 3
 
     // This is the most involved, coding-wise, of the exercises in this

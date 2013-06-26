@@ -24,6 +24,9 @@ Meteor.autorun(function () {
   // Get an assignment any time we notice we need one (we're logged in, we're
   // not viewing a game) and don't have it in the "assignment" session variable.
 
+  // Note: if we're viewing a game, its id is in the `viewingGame` Session
+  // variable.
+
   // Set the "assignment" session variable to the result.
 });
 

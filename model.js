@@ -1,7 +1,7 @@
 /*
  * A move consists of
  * assignee -- _id of the user assigned this move
- * game -- _id if the game this belongs to
+ * game -- _id of the game this belongs to
  * previous -- _id of the previous move in the game, or null
  * expires -- Date at which this move expires
  * answer -- string description or object canvas contents, or null if not specified yet.

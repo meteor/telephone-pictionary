@@ -77,7 +77,7 @@ Template.draw.events({
 // PHASE 1
 
 // Make a template helper on Template.colorButton that returns "active" if the
-// "pencilColor" environment variable is its color, and "" otherwise.
+// "pencilColor" Session variable is its color, and "" otherwise.
 // Hints:
 // * See the activeIfTrue helper in util.js
 // * Session.equals(sessionVarName, value) will help you

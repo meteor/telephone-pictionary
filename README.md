@@ -8,7 +8,8 @@ this repository is a working game.
 # Walkthrough
 
 Throughout this course, you can use `git grep PHASE N` to find spots in the code
-relevant to the phase you're working on.
+relevant to the phase you're working on, if you're working on phase `N`.  For
+example, to find spots in the code relevant to phase 1, type `git grep PHASE 1`.
 
 To start playing:
 
@@ -21,6 +22,8 @@ You should now be able to go to `localhost:3000` in your browser, and have
 access to a basic drawing program.  Spend a little time poking around the code,
 in advance of getting down and dirty with it very soon.
 
+-- More comments on the code already there. PHASE 1 EXAMPLE for ex.
+
 ## Phase 1
 
 Here you'll be getting used to Meteor's reactive templating system.  That sounds
@@ -28,4 +31,23 @@ fancy and complicated, but what it really means is that Meteor does its best to
 tell when the information substituted into your HTML templates changes, and
 automatically re-renders the templates for you on the page.
 
-The task here is to add color support to our drawing program.
+The task here is to add color support to our drawing program.  You'll be working
+in `client/draw.js` and `client/draw.html`.
+
+ --- Talk about template helpers.
+ --- Meteor repalces double curlies
+ --- Special double-curly-with-hash for flow control if/each
+ --- In Meteor you rarely want href attrs; you don't want links to reload the page.
+
+## Phase 2
+
+-- Meteor adds
+
+
+## Phase 3
+
+-- Findign the game to put the move in could be the assignment, cut the rest of it.
+
+## Phase 6
+
+-- Reference to docs and a lil lecture
