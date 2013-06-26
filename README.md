@@ -10,7 +10,7 @@ this repository is a working game.
 
 # Walkthrough
 
-Throughout this course, you can use `git grep PHASE N` to find spots in the code
+Throughout this course, you can use `git grep 'PHASE N'` to find spots in the code
 relevant to the phase you're working on, if you're working on phase `N`.  For
 example, to find spots in the code relevant to phase 1, type `git grep PHASE 1`.
 
