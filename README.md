@@ -17,7 +17,7 @@ example, to find spots in the code relevant to phase 1, type `git grep PHASE 1`.
 To start playing:
 
 * Install Meteor.  At your terminal, type:
-    $ curl https://install.meteor.com | /bin/sh
+        $ curl https://install.meteor.com | /bin/sh
 * Check out this git repository
 * Navigate to your checkout, and type `meteor` at your terminal.
 
@@ -44,9 +44,9 @@ Meteor searches two places for filling in Handlebars variables:
   `{{foo}}` in the template called `sillyWords`, assign a function to the
   variable `Template.sillyWords.foo` For example:
 
-    Template.sillyWords.foo = function () {
-      return Random.choice(["pabst", "furblig", "blick"]);
-    }
+        Template.sillyWords.foo = function () {
+          return Random.choice(["pabst", "furblig", "blick"]);
+        }
 
 * The *data context* of your template.  You can create a data context by writing
   `{{#with helper}}` or `{{#each helper}}` (closed by `{{/with}}` and
