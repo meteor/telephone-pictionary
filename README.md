@@ -1,4 +1,7 @@
-# Telephone-Pictionary is a game where you alternately draw phrases and describe drawings.
+# Telephone-Pictionary Meteor Crash Course
+
+Telephone-Pictionary is a game where you alternately draw phrases and describe
+drawings.
 
 This is meant to be a crash course in the Meteor Javascript web framework.  The
 `master` branch of this repository is not fully implemented; finishing the
