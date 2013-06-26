@@ -1,37 +1,26 @@
 /*
  * A move consists of
- * an assignee,
- * a game (foreign key),
- * a previous move (none
- * if the first move), an expiration, and an answer (supplied later).
+ * assignee -- _id of the user assigned this move
+ * game -- _id if the game this belongs to
+ * previous -- _id of the previous move in the game, or null
+ * expires -- Date at which this move expires
+ * answer -- string description or object canvas contents, or null if not specified yet.
 */
 Moves = new Meteor.Collection("moves");
 
 /*
- * A game consists of
- * A list of moves
- * A list of participants
- * A current active move (or none)
- * A boolean for its finished state.
+ * A game consists of:
+ * moves -- list of move _ids
+ * participants -- list of user _ids
+ * activeMove -- the _id of the current active move in this game, or null
+ * done -- true iff this game is done.
  */
 Games = new Meteor.Collection("games");
 
 
 if (Meteor.isServer) {
-  Meteor.publish('gamesForUser', function () {
-    return  Games.find({
-      done: true,
-      participants: this.userId
-    });
-  });
+  // PHASE 7
+  // Publish all games that are done and the current user is a participant
 
-  Meteor.publish('movesForGame', function (gameId) {
-    var game = Games.find({_id: gameId, participants: this.userId});
-    if (game) {
-      return Moves.find({
-        game: gameId
-      });
-    }
-    return null;
-  });
+  // Publish all moves for a given game, as long as the current user is a participant.
 }

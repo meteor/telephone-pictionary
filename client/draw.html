@@ -24,6 +24,11 @@
           <a class="btn small {{smActive}}">&#x2022;</a>
         </div>
         <div class="btn-group">
+          <!-- PHASE 1
+               For each color (see Template.draw.colors), make a button to turn the pen that color.
+
+               Use the colorButton template for the html here.
+            -->
           {{#each colors}}
           {{> colorButton}}
           {{/each}}
@@ -44,5 +49,13 @@
 </template>
 
 <template name="colorButton">
-  <a class="btn {{this}} {{active}}" style="color: {{this}}">&#x2B24;</a>
+  <!-- PHASE 1
+       Make a link with the classes:
+       * btn
+       * the color of the button
+       * "active" if the button is active.  See the activeIfTrue helper in util.js
+
+       The link should have a style attribute that turns its color to the chosen
+    color, and some character that lets you see the chosen color (I recommend &#x2B24;)
+    -->
 </template>

@@ -1,5 +1,8 @@
 Session.setDefault('pencilActive', true);
 Session.setDefault('pencilSize', "medium");
+
+// PHASE 1
+// Set the default value of the session variable 'pencilColor' to "black"
 Session.setDefault('pencilColor', "black");
 
 Template.draw.rendered = (function () {
@@ -16,11 +19,12 @@ Template.draw.rendered = (function () {
           medium: 4,
           large: 8
         }[Session.get('pencilSize')];
-        self.canvas.freeDrawingBrush.color = Session.get('pencilColor');
+        // PHASE 1
+        // Set the canvas's color to the value of the session variable 'pencilColor'
+        // hint: canvas.freeDrawingBrush.color is the attribute in question
       }
     });
   }
-  CANVAS = self.canvas;
 });
 
 Template.draw.destroyed = function () {
@@ -70,20 +74,26 @@ Template.draw.events({
   }
 });
 
-Template.colorButton.active = function () {
-  return activeIfTrue(Session.equals("pencilColor", this.toString()));
-};
+// PHASE 1
 
-Template.colorButton.events({
-  'click' : function () {
-    Session.set('pencilColor', this.toString());
-  }
-});
+// Make a template helper on Template.colorButton that returns "active" if the
+// "pencilColor" environment variable is its color, and "" otherwise.
+// Hints:
+// * See the activeIfTrue helper in util.js
+// * Session.equals(sessionVarName, value) will help you
+// * "this" will just be the string name of the color if you call toString() on it.
 
-Template.draw.events({
-  'submit, click #done': function (evt, templ) {
-    if (templ.canvas) {
-      submitAnswer(templ.canvas.toObject());
-    }
-  }
-});
+// PHASE 1
+
+// Put an event handler on color buttons that sets the 'pencilColor' Session
+// variable to that color when you click them.
+
+// Remember that you can call this.toString()
+
+
+// PHASE 5
+
+// When we click #done on drawing, submit the canvas's object representation
+// (call toObject() on it)
+
+// note: see the submitAnswer helper in main.js

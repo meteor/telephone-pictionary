@@ -1,23 +1,18 @@
-Meteor.autorun(function () {
-  Meteor.subscribe('gamesForUser');
-});
-
-Meteor.autorun(function () {
-  Games.find().forEach(function (game) {
-    Meteor.subscribe('movesForGame', game._id);
-  });
-});
-
+// Define a helper function that will be truthy if we're logged in.
 Template.main.loggedIn = Template.sidebar.loggedIn = function () {
-  return Meteor.userId();
+  return false;
+  // PHASE 2
+  // Return something truthy if we're logged in.
 };
 
 Template.main.assignment = function () {
-  if (!Session.get("viewingGame"))
-    return Session.get('assignment');
-  return null;
+  // PHASE 3 Eventually, return the current assignment if we're not in
+  // game-viewing mode.  For now, return a dummy.
+
+  return { description: "Lorem ipsum dolor sic amet"};
 };
 
+// return the game we're viewing, if any.
 Template.main.game = function () {
   if (Session.get("viewingGame"))
     return Games.findOne(Session.get("viewingGame"));
@@ -25,13 +20,11 @@ Template.main.game = function () {
 };
 
 Meteor.autorun(function () {
-  if (Meteor.userId() &&
-      !Session.get("viewingGame") &&
-      !Session.get("assignment")) {
-    Meteor.call("getAssignment", function (err, res) {
-      Session.set("assignment", res);
-    });
-  }
+  // PHASE 3
+  // Get an assignment any time we notice we need one (we're logged in, we're
+  // not viewing a game) and don't have it in the "assignment" session variable.
+
+  // Set the "assignment" session variable to the result.
 });
 
 submitAnswer = function (answer) {
@@ -72,3 +65,12 @@ Template.sidebar.gameActive = function () {
 Template.sidebar.playActive = function () {
   return activeIfTrue(!Session.get("viewingGame"));
 };
+
+Meteor.autorun(function () {
+  // PHASE 7
+  // inside this autorun, subscribe to:
+
+  // * All games where this user is a participant and the game is done (see
+  //   publish section in model.js)
+  // * For all games we can see, all moves.
+});
