@@ -3,7 +3,6 @@ Session.setDefault('pencilSize', "medium");
 
 // PHASE 1
 // Set the default value of the session variable 'pencilColor' to "black"
-Session.setDefault('pencilColor', "black");
 
 Template.draw.rendered = (function () {
   var self = this;

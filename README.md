@@ -197,3 +197,28 @@ function of the same name.
 
 Find the places in `model.js` and `main.js` to implement publishes and
 subscriptions, respectively.
+
+## Appendix: How did we get here?
+
+This walkthrough dumps you in to the middle of a Meteor project.  How did we get
+from a blank filesystem to the state of the repository you checked out?
+
+First, we created a blank application with
+    meteor create telephone-pictionary
+
+We proceeded to create `client` and `server` directories there, so that we could
+easily have code execute just on the client, or just on the server, and we moved
+some of the default files to the `client` directory.
+
+Next, we added the Twitter Bootstrap package, to make styling things easier.
+
+    meteor add bootstrap
+
+Since we didn't want to write a whole canvas drawing program ourselves, we went
+to [http://fabricjs.com/build/](http://fabricjs.com/build/) and downloaded a
+build of Fabric with Interaction, Serialization, Parser, and Free Drawing
+selected.  We dropped it in `client/compatibility/fabric.js` in our
+project. (`client/compatibility` is a directory for third-party libraries that
+expect to be able to declare global variables with the `var` keyword).
+
+Finally, we wrote some code.
