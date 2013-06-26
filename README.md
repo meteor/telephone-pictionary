@@ -39,10 +39,10 @@ variables.
 
 Meteor searches two places for filling in Handlebars variables:
 
- * *Template helpers*, which are functions in your Javascript code that return
-   the values to substitute.  To provide a template helper that will substitute
-   `{{foo}}` in the template called `sillyWords`, assign a function to the
-   variable `Template.sillyWords.foo` For example:
+* *Template helpers*, which are functions in your Javascript code that return
+  the values to substitute.  To provide a template helper that will substitute
+  `{{foo}}` in the template called `sillyWords`, assign a function to the
+  variable `Template.sillyWords.foo` For example:
 
     Template.sillyWords.foo = function () {
       return Random.choice(["pabst", "furblig", "blick"]);
