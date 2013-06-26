@@ -35,7 +35,7 @@ Meteor.methods({
       // * We have not yet participated in this game (you can leave this
       //   one out for a while while you test).
 
-      // If we found the a game, set up the `previous` field on the move with the
+      // If we found zaa game, set up the `previous` field on the move with the
       // previous move in that game.
 
       // If we haven't found a game, set one up and insert it into the Games
