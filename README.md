@@ -112,7 +112,7 @@ Mongo is a non-SQL object database with a Javascript object based query
 language.  For example, for a collection `Coll`, `Coll.find({a: 3, b: "foo"})`
 finds every object in the collection for which `a` is `3` and `b` is
 `"foo"`. You can also use a variety of selector operations, such as
-`Coll.find({a: {$lt: 3}}), for all objects with `a` less than `3`.  Every object
+`Coll.find({a: {$lt: 3}})`, for all objects with `a` less than `3`.  Every object
 in the database has an `_id` field that uniquely specifies it.
 
 The Mongo operations of note are:
