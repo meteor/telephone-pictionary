@@ -3,6 +3,7 @@ Session.setDefault('pencilSize', "medium");
 
 // PHASE 1
 // Set the default value of the session variable 'pencilColor' to "black"
+Session.setDefault('pencilColor', "black");
 
 Template.draw.rendered = (function () {
   var self = this;
@@ -21,6 +22,7 @@ Template.draw.rendered = (function () {
         // PHASE 1
         // Set the canvas's color to the value of the session variable 'pencilColor'
         // hint: canvas.freeDrawingBrush.color is the attribute in question
+        self.canvas.freeDrawingBrush.color = Session.get('pencilColor');
       }
     });
   }
@@ -85,6 +87,10 @@ Template.draw.events({
 // * Session.equals(sessionVarName, value) will help you
 // * "this" will just be the string name of the color if you call toString() on it.
 
+Template.colorButton.active = function () {
+  return activeIfTrue(Session.equals('pencilColor', this.toString()));
+};
+
 // PHASE 1
 
 // Put an event handler on color buttons that sets the 'pencilColor' Session
@@ -92,6 +98,11 @@ Template.draw.events({
 
 // Remember that you can call this.toString()
 
+Template.colorButton.events({
+  'click': function (evt, templ) {
+    Session.set('pencilColor', this.toString());
+  }
+});
 
 // PHASE 5
 

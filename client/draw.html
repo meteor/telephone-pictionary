@@ -29,6 +29,9 @@
 
                Use the colorButton template for the html here.
             -->
+          {{#each colors}}
+            {{> colorButton}}
+          {{/each}}
         </div>
       </div>
     </div>
@@ -55,4 +58,5 @@
        The link should have a style attribute that turns its color to the chosen
     color, and some character that lets you see the chosen color (I recommend &#x2B24;)
     -->
+  <a class="btn {{active}}" style="color: {{this}}">&#x2B24;</a>
 </template>
