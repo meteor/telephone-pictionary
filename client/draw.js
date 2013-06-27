@@ -109,4 +109,12 @@ Template.colorButton.events({
 // When we click #done on drawing, submit the canvas's object representation
 // (call toObject() on it)
 
+Template.draw.events({
+  "click #done": function (evt, temp) {
+    if (temp.canvas) {
+      submitAnswer(temp.canvas.toObject());
+    }
+  }
+});
+
 // note: see the submitAnswer helper in main.js

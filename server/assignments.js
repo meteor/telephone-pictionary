@@ -99,8 +99,11 @@ Meteor.methods({
     check(assignmentId, String);
     // Do more answer validation.
     var assignment = Moves.findOne(assignmentId);
-    if (assignment.expires.valueOf() < new Date().valueOf())
+    if (assignment.expires.valueOf() < new Date().valueOf()) {
+      Moves.remove(assignment._id);
+      Games.update(assignment.game, {$set: {activeMove: null}});
       throw new Meteor.Error(403, "Assignment has expired");
+    }
     var previous = Moves.findOne(assignment.previous);
     if (previous && typeof previous.answer === 'string')
       check(answer, Object);

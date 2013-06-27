@@ -30,7 +30,10 @@ Template.describe.events({
     // PHASE 5
     // use the template to find the '#phrase' input element
     // if it has a value, submit that.
-
+    var description = templ.find('#phrase').value;
+    if (description) {
+      submitAnswer(description);
+    }
     // note: check the submitAnswer helper function in main.js
   }
 });
