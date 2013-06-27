@@ -1,3 +1,5 @@
+Session.setDefault("assignment", null);
+
 // Define a helper function that will be truthy if we're logged in.
 Template.main.loggedIn = Template.sidebar.loggedIn = function () {
   return false;
