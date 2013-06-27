@@ -10,9 +10,9 @@ Template.main.assignment = function () {
 
   // Return the current assignment if we're not in game-viewing mode (in
   // game-viewing mode, the 'viewingGame' Session variable is truthy).
-
-  // For now, return a dummy.
-  return { description: "Lorem ipsum dolor sic amet"};
+  if (!Session.get('viewingGame'))
+    return Session.get("assignment");
+  return null;
 };
 
 // return the game we're viewing, if any.
@@ -28,6 +28,13 @@ Meteor.autorun(function () {
   // Use Meteor.call to get an assignment any time we notice we need one
   // (we're logged in, we're not viewing a game) and don't have it in the
   // "assignment" session variable.
+  if (Meteor.userId() && !Session.get('assignment') && !Session.get('viewingGame')) {
+    Meteor.call('getAssignment', function (err, res) {
+      if (err)
+        console.log(err);
+      Session.set('assignment', res);
+    });
+  }
 
   // Note: if we're viewing a game, its id is in the `viewingGame` Session
   // variable.

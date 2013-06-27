@@ -34,13 +34,29 @@ Meteor.methods({
       // * The game has no active move.
       // * We have not yet participated in this game (you can leave this
       //   one out for a while while you test).
+      var game = Games.findOne({
+        done: false,
+        activeMove: null
+      });
 
-      // If we found zaa game, set up the `previous` field on the move with the
+      // If we found a game, set up the `previous` field on the move with the
       // previous move in that game.
+      if (game) {
+        move.previous = game.moves[game.moves.length - 1];
+        move.game = game._id;
+      } else {
 
-      // If we haven't found a game, set one up and insert it into the Games
-      // collection. (hint: It's not done, its `activeMove` is null, has no
-      // participants yet, and no moves yet)
+        // If we haven't found a game, set one up and insert it into the Games
+        // collection. (hint: It's not done, its `activeMove` is null, has no
+        // participants yet, and no moves yet)
+        game = {
+          done: false,
+          activeMove: null,
+          participants: [],
+          moves: []
+        };
+        move.game = Games.insert(game);
+      }
 
       // Either way, set the `game` field on the move to be the _id of the game
       // it belongs to.
@@ -50,6 +66,7 @@ Meteor.methods({
       Moves.insert(move);
 
       // PHASE 3
+      Games.update(move.game, {$set: {activeMove: move._id}});
 
       // Okay, now let's set the `activeMove` of our game to our new move, using
       // the update() method on the Games collection.
