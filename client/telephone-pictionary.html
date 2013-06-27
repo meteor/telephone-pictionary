@@ -4,6 +4,7 @@
 
 <body>
   <!-- PHASE 2 Add login buttons -->
+  {{loginButtons}}
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span8 offset1">
@@ -16,6 +17,7 @@
 </body>
 
 <template name="main">
+  {{#if loggedIn}}
   <!-- PHASE 2 Add code to display only a special message to log in if we are not yet logged in -->
   {{#with assignment}}
     <!-- PHASE 4 We should decide whether we're drawing, describing, or starting
@@ -28,9 +30,13 @@
     <!-- This will show the results of a finished game, if we're supposed to be looking at one -->
     {{> show}}
   {{/with}}
+  {{else}}
+    <h1>Please log in to play!</h1>
+  {{/if}}
 </template>
 
 <template name="sidebar">
+  {{#if loggedIn}}
   <!-- PHASE 2 Add code to display a sidebar if you're logged in but not otherwise -->
   <ul class="nav nav-pills nav-stacked">
     <li class="{{playActive}}"><a class="playGame">Play</a></li>
@@ -39,6 +45,7 @@
     <li class="{{gameActive}}"><a class="selectGame" id="{{_id}}">{{firstPhrase}}</a></li>
     {{/each}}
   </ul>
+  {{/if}}
 </template>
 
 <template name="show">
