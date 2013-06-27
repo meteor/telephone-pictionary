@@ -76,7 +76,10 @@ Template.draw.events({
 // PHASE 1
 
 // Make a template helper on Template.colorButton that returns "active" if the
-// "pencilColor" Session variable is its color, and "" otherwise.
+// "pencilColor" Session variable is its color, and "" otherwise. (the word
+// "active" is because the Twitter Bootstrap uses that class to activate
+// elements in the UI)
+
 // Hints:
 // * See the activeIfTrue helper in util.js
 // * Session.equals(sessionVarName, value) will help you
