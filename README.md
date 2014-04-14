@@ -8,6 +8,12 @@ This is meant to be a crash course in the Meteor Javascript web framework.  The
 implementation is left as an exercise to the reader.  The `solution` branch of
 this repository is a working game.
 
+# Test Drive Telephone Pictionary
+
+Click this button to start hacking on Telephone Pictionary on [Nitrous.IO](https://www.nitrous.io/?utm_source=github.com&utm_campaign=meteor-telephone-pictionary&utm_medium=hackonnitrous) in a matter of seconds:
+
+[![Hack meteor/telephone-pictionary on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=nodejs&repo=meteor%2Ftelephone-pictionary&file_to_open=README.nitrous.md)
+
 # Walkthrough
 
 Throughout this course, you can use `git grep 'PHASE N'` to find spots in the code
