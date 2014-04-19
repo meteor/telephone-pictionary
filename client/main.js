@@ -2,9 +2,9 @@ Session.setDefault("assignment", null);
 
 // Define a helper function that will be truthy if we're logged in.
 Template.main.loggedIn = Template.sidebar.loggedIn = function () {
-  return false;
-  // PHASE 2
+  // PHASE 2 x
   // Return something truthy if we're logged in.
+  return Meteor.userId();
 };
 
 Template.main.assignment = function () {
