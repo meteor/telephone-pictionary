@@ -1,10 +1,9 @@
-# Setup
+# Getting Started
 
 Run the following commands in the Terminal below:
 
 1. `cd ~/workspace/telephone-pictionary`
-2. `parts install meteor`
-3. `meteor`
+2. `meteor`
 
 Go to the "Preview Menu" and click "Port 3000"
 

@@ -12,7 +12,7 @@ this repository is a working game.
 
 Click this button to start hacking on Telephone Pictionary on [Nitrous.IO](https://www.nitrous.io/?utm_source=github.com&utm_campaign=meteor-telephone-pictionary&utm_medium=hackonnitrous) in a matter of seconds:
 
-[![Hack meteor/telephone-pictionary on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=nodejs&repo=meteor%2Ftelephone-pictionary&file_to_open=README.nitrous.md)
+[![Hack meteor/telephone-pictionary on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=meteor&repo=meteor%2Ftelephone-pictionary&file_to_open=README.nitrous.md)
 
 # Walkthrough
 
